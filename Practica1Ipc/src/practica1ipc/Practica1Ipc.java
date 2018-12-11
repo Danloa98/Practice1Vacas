@@ -23,7 +23,12 @@ public class Practica1Ipc {
     String asientosSala5[][]= new String[8][5];
     String asientosSala6[][]= new String[8][5];
     int contPeliIngresada=0;//Contador para que incremente cada que ingreso una pelicula individual
-    
+    int sizeSala1=0;//Guardará la longitud de las salas, sirve para saber si ya se le asignó una pelicula. (ASIGNACION MANUAL) 
+    int sizeSala2=0;
+    int sizeSala3=0;
+    int sizeSala4=0;
+    int sizeSala5=0;
+  
     
     String nombreUsuario;
     int password;
@@ -45,7 +50,7 @@ public class Practica1Ipc {
         try {
 
             if (nombreUsuario.equalsIgnoreCase("Vendedor") && password == 201700390) {//Verificar la validacion para el tipo de dato de password
-                nombreUsuario = null;
+              nombreUsuario = null;
                 sistemaVendedor();
 
             } else if (nombreUsuario.equalsIgnoreCase("Admin") && password == 201700390) {
@@ -344,7 +349,7 @@ public class Practica1Ipc {
         String datosSeparados[]=null;
         if(contPeliIngresada>0){
               for (int i =0; i < datos.length; i++) {
-            datosSeparados=datos[i].split(",");
+            datosSeparados=datos[i].split(",");//Esta es la línea clave para la carga masiva
             peliculas[0][contPeliIngresada]=datosSeparados[0];
             peliculas[1][contPeliIngresada]=datosSeparados[1];
             peliculas[2][contPeliIngresada]=datosSeparados[2];
@@ -353,12 +358,13 @@ public class Practica1Ipc {
         }
             
         }else{
-                    for (int i = 0; i < datos.length; i++) {
+            for (int i = 0; i < datos.length; i++) {
             datosSeparados=datos[i].split(",");
             peliculas[0][i]=datosSeparados[0];
             peliculas[1][i]=datosSeparados[1];
             peliculas[2][i]=datosSeparados[2];
             peliculas[3][i]=datosSeparados[3];
+            contPeliIngresada++;
             
         }
             
@@ -369,7 +375,191 @@ public class Practica1Ipc {
 
     //--------------------------------------------------------------------------------------------------------------------
     public void asignarPeliculas() {//Método para asignar películas a las salas
+        int opc;
+        System.out.println("*************************************");
+        System.out.println("Asignación de Películas a las salas");
+        System.out.println("**************************************");
+        System.out.println("");
+        System.out.println("Elija una de las opciones");
+        System.out.println("");
+        System.out.println("1. Asignación Manual");
+        System.out.println("2. Asignación atomática");
+        System.out.println("3. Ver películas asignadas");
+        System.out.println("4. Regresar");
+        opc=s.nextInt();
+        switch(opc){
+            case 1:
+                asignacionManual();
+                break;
+                
+            case 2:
+                asignacionAutomatica();
+                break;
+                
+            case 3:
+                verPeliculasAsignadas();
+                break;
+                
+            case 4:
+                sistemaAdmin();
+                break;
+                
+            default:
+                System.out.println("¡ERROR! Elija una opción correcta...");
+                asignarPeliculas();
+                break;
+                
+        }
+    }
+    
+    public void asignacionManual(){
+        //VERIFICAR scanners
+        Scanner k= new Scanner(System.in);
+        int posicionPelicula;
+        int salaElecta;//Sala que el admin elije para asignarle la película
+        int opcionSalida;//Para salir de esta opcion o signar nuevamente una película...
+        System.out.println("_______________________");
+        System.out.println("ASIGNACIÓN MANUAL");
+        System.out.println("_______________________");
+        System.out.println("");
+        
+        if(contPeliIngresada==0){
+            System.out.println("****AÚN NO HAY PELÍCULAS DISPONIBLES, INTENTE INGRESAR ALGUNAS...****");
+            sistemaAdmin();
+        }else{
+        System.out.println("A continuacón, se muestran las películas dispoblibles");
+        
+        for (int i = 0; i <contPeliIngresada; i++) {
+            System.out.println((i+1)+"."+peliculas[0][i]);
+        }
+        System.out.println("");
+        System.out.println("Salas Disponibles ");//Opcion que sirve ya que si asigno una peli a la sala 5, esta ya no estará disponible :
+        
+        if(sizeSala1==0){
+            System.out.println("Sala 1");
+        }if(sizeSala2==0){
+            System.out.println("Sala 2");
+        }if(sizeSala3==0){
+            System.out.println("Sala 3");
+        }if(sizeSala4==0){
+            System.out.println("Sala 4");
+        }if(sizeSala5==0){
+            System.out.println("Sala 5");
+        }else{
+            System.out.println("No salas disponibles, intente de nuevo más tarde...");
+            sistemaAdmin();
+        }
+        
+        System.out.println("Ingrese el número de película que dese asignar...");
+        posicionPelicula=s.nextInt();
+        //Asignarselo a la sala
+        
+        System.out.println("Elija la Sala a la que desea asignar dicha película (1-5)");
+        salaElecta=s.nextInt();
+        if(salaElecta==1){
+            sala1[sizeSala1]=peliculas[0][posicionPelicula];//Aquí ya le asignó la película electa a la sala elegida
+            sizeSala1++;
+        }else if(salaElecta==2){
+             sala2[sizeSala2]=peliculas[0][posicionPelicula];
+            sizeSala2++;
+        }else if(salaElecta==3){
+            sala3[sizeSala3]=peliculas[0][posicionPelicula];
+            sizeSala3++;
+        }else if(salaElecta==4){
+            sala4[sizeSala4]=peliculas[0][posicionPelicula];
+            sizeSala4++;
+            
+        }else if(salaElecta==5){
+            sala5[sizeSala5]=peliculas[0][posicionPelicula];
+            sizeSala5++;
+        }
+        
+        System.out.println("");
+        
+        System.out.println("Película: "+peliculas[0][posicionPelicula] +" asignada a Sala"+salaElecta);
+        System.out.println("");
+        System.out.println("Presione 0 para salir o 1 para asignar nuevamente una película...");
+        opcionSalida=k.nextInt();
+        if(opcionSalida==0){
+            asignarPeliculas();
+        }else if(opcionSalida==1){
+            asignacionManual();
+        }else{
+            System.out.println("Opción incorrecta...Saliendo del sistema...");
+            sistemaAdmin();
+        }
+        
+        }
+        
 
+        
+        
+        
+    }
+    
+    public void asignacionAutomatica(){
+        
+    }
+    
+    public void verPeliculasAsignadas(){
+        System.out.println("___________");
+        System.out.println("SALA 1");
+        System.out.println("____________");
+        
+        if(sizeSala1==0){
+            System.out.println("Aún sin películas asignadas...");
+        }else{
+            for(int i=0; i<sizeSala1; i++){
+                System.out.println((i+1)+"."+sala1[i]);
+            }
+        }
+        
+        
+        System.out.println("___________");
+        System.out.println("SALA 2");
+        System.out.println("____________");
+        if(sizeSala2==0){
+            System.out.println("Aún sin películas asignadas...");
+        }else{
+            for(int i=0; i<sizeSala2; i++){
+                System.out.println((i+1)+"."+sala2[i]);
+            }
+        }
+
+        System.out.println("___________");
+        System.out.println("SALA 3");
+        System.out.println("____________");        
+        if(sizeSala3==0){
+            System.out.println("Aún sin películas asignadas...");
+        }else{
+            for(int i=0; i<sizeSala3; i++){
+                System.out.println((i+1)+"."+sala3[i]);
+            }
+        }
+        
+        System.out.println("___________");
+        System.out.println("SALA 4");
+        System.out.println("____________");
+        if(sizeSala4==0){
+            System.out.println("Aún sin películas asignadas...");
+        }else{
+            for(int i=0; i<sizeSala4; i++){
+                System.out.println((i+1)+"."+sala4[i]);
+            }
+        }
+
+        System.out.println("___________");
+        System.out.println("SALA 5");
+        System.out.println("____________");        
+        if(sizeSala5==0){
+            System.out.println("Aún sin películas asignadas...");
+        }else{
+            for(int i=0; i<sizeSala5; i++){
+                System.out.println((i+1)+"."+sala5[i]);
+            }
+        }
+        
+        
     }
 
     public void simulacionPeliculas() {
