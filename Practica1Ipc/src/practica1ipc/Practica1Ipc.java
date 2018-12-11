@@ -225,7 +225,8 @@ public class Practica1Ipc {
 
     //-----------------------------------------Ingreso de películas Individual-------------------------------------------
     public void ingresarIndividual() {
-        
+        Scanner v=new Scanner(System.in);
+        Scanner v2=new Scanner(System.in);
         String nombrePelicula;
         int tiempoDuracion;
         String productor;
@@ -239,13 +240,21 @@ public class Practica1Ipc {
         System.out.println("**************");
         
         System.out.println("Ingrese nombre de la película: ");
-        nombrePelicula=s.nextLine();
+            System.out.println("");
+            System.out.println("");   
+        nombrePelicula=v.nextLine();
+        
         System.out.println("Ingrese el tiempo de duración");
-        tiempoDuracion=s2.nextInt();
+        tiempoDuracion=v.nextInt();
+            System.out.println("");
+            System.out.println("");
+            
         System.out.println("Ingrese nombre del productor: ");
-        productor=s.nextLine();
+        productor=v2.nextLine();
+            System.out.println("");
+            System.out.println("");
         System.out.println("Ingrese lenguaje de la película: ");
-        lenguaje=s2.nextLine();
+        lenguaje=v2.nextLine();
         
         peliculas[0][contPeliIngresada]=nombrePelicula;
         peliculas[1][contPeliIngresada]=Integer.toString(tiempoDuracion);
@@ -294,6 +303,7 @@ public class Practica1Ipc {
             }
             
         }
+        System.out.println("_____________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________");
                 for (int i = 0; i < 4; i++) {
             for (int j = 0; j < 100; j++) {
                 System.out.print(" | " +peliculas[i][j]+"  |  ");
@@ -302,6 +312,7 @@ public class Practica1Ipc {
             System.out.println("");
             
         }
+        System.out.println("_______________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________");
                 
                 System.out.println("");
                 System.out.println("PRESIONE 0 PARA REGRESAR AL MENU");
@@ -319,6 +330,40 @@ public class Practica1Ipc {
     //-------------------------------------------------------------------------------------------------------------------
 //--------------------------------------------Ingreso de películas por grupo---------------------------------------------
     public void ingresarPorGrupo() {
+        Scanner h= new Scanner(System.in);
+        String cadena;
+        System.out.println("*********************************");
+        System.out.println("Ingrese de películas por grupos");
+        System.out.println("**********************************");
+        
+        System.out.println("Ingrese la cadena para cargar las películas al sistema");
+        cadena=h.nextLine();
+        
+        
+        String datos[]=cadena.split(";");
+        String datosSeparados[]=null;
+        if(contPeliIngresada>0){
+              for (int i =0; i < datos.length; i++) {
+            datosSeparados=datos[i].split(",");
+            peliculas[0][contPeliIngresada]=datosSeparados[0];
+            peliculas[1][contPeliIngresada]=datosSeparados[1];
+            peliculas[2][contPeliIngresada]=datosSeparados[2];
+            peliculas[3][contPeliIngresada]=datosSeparados[3];
+            contPeliIngresada++;
+        }
+            
+        }else{
+                    for (int i = 0; i < datos.length; i++) {
+            datosSeparados=datos[i].split(",");
+            peliculas[0][i]=datosSeparados[0];
+            peliculas[1][i]=datosSeparados[1];
+            peliculas[2][i]=datosSeparados[2];
+            peliculas[3][i]=datosSeparados[3];
+            
+        }
+            
+        }
+        
 
     }
 
