@@ -9,7 +9,22 @@ import java.util.Random;
  * @author DANIEL
  */
 public class Practica1Ipc {
-
+    
+    String sala1[]=new String[10];//Arreglos que posteriormente me servirán para el reporte ya que almacenarán cada peliculas que se vaya pasando en dicha sala
+    String sala2[]=new String[10];
+    String sala3[]=new String[10];
+    String sala4[]=new String[10];
+    String sala5[]=new String[10];
+    String peliculas[][]=new String[4][100];//4 filas 100 columnas. Lo maxio de peliculas es 100 Validar eso
+    String asientosSala1[][]= new String[8][5];//Matriz para visualizar los asientos disponibles en las salas
+    String asientosSala2[][]= new String[8][5];
+    String asientosSala3[][]= new String[8][5];
+    String asientosSala4[][]= new String[8][5];
+    String asientosSala5[][]= new String[8][5];
+    String asientosSala6[][]= new String[8][5];
+    int contPeliIngresada=0;//Contador para que incremente cada que ingreso una pelicula individual
+    
+    
     String nombreUsuario;
     int password;
     int opc;
@@ -21,7 +36,7 @@ public class Practica1Ipc {
         System.out.println("Bienvenido");
         System.out.println("");
 
-        System.out.println("Ingrese su nobre de usuario: ");
+        System.out.println("Ingrese su nombre de usuario: ");
         nombreUsuario = s.nextLine();
 
         System.out.println("Ingrese su contraseña: ");
@@ -102,49 +117,67 @@ public class Practica1Ipc {
 
     //::::::::::::::::::::::::::::::::::::::MENÚ ADMINISTRADOR::::::::::::::::::::::::::::::::::::::::::::::::::
     public void sistemaAdmin() {
-        int opc;
-        System.out.println("");
-        System.out.println("*******************");
-        System.out.println("MODO ADMINISTRADOR");
-        System.out.println("********************");
 
-        System.out.println("Elaja una de las siguientes opciones del menú: ");
-        System.out.println("1. Ingresar películas");
-        System.out.println("2. Asignación de Películas a la sala");
-        System.out.println("3. Simulación de películas");
-        System.out.println("4. Reportes");
-        System.out.println("5. Regresar");
-        System.out.println("6. Salir del sistema");
+        try {
+            int opc;
+            System.out.println("");
+            System.out.println("*******************");
+            System.out.println("MODO ADMINISTRADOR");
+            System.out.println("********************");
 
-        opc = s.nextInt();
+            System.out.println("Elaja una de las siguientes opciones del menú: ");
+            System.out.println("1. Ingresar películas");
+            System.out.println("2. Asignación de Películas a la sala");
+            System.out.println("3. Simulación de películas");
+            System.out.println("4. Reportes");
+            System.out.println("5. Regresar");
+            System.out.println("6. Salir del sistema");
+            System.out.println("7. Mostrar Peliculas Ingresadas");
 
-        switch (opc) {
-            case 1:
-                ingresarPeliculas();
-                break;
+            opc = s.nextInt();
 
-            case 2:
-                asignarPeliculas();
-                break;
+            switch (opc) {
+                case 1:
+                    ingresarPeliculas();
+                    break;
 
-            case 3:
-                simulacionPeliculas();
-                break;
+                case 2:
+                    asignarPeliculas();
+                    break;
 
-            case 4:
-                reportes();
-                break;
+                case 3:
+                    simulacionPeliculas();
+                    break;
 
-            case 5:
-                entradaSistema();
-                break;
+                case 4:
+                    reportes();
+                    break;
 
-            case 6:
-                System.exit(0);
-                break;
+                case 5:
+                    entradaSistema();
+                    break;
+
+                case 6:
+                    System.exit(0);
+                    break;
+                    
+                case 7:
+                    mostrarPeliculas();
+                    break;
+                    
+                default:
+                    System.out.println("Opcion incorrecta, debe ingresar un número entre 1-");
+                    System.out.println("");
+                    sistemaAdmin();
+                    break;
+            }
+
+        } catch (Exception e) {
+
         }
 
     }
+//----------------------------------------------- Menú para Ingreso de películas--------------------------------------
 
     public void ingresarPeliculas() {
 
@@ -158,13 +191,138 @@ public class Practica1Ipc {
             System.out.println("1. Ingresar individual ");
             System.out.println("2. Ingresar por grupo");
             System.out.println("3. Regresar");
+            opc = s.nextInt();
+
+            switch (opc) {
+
+                case 1:
+                    ingresarIndividual();
+                    break;
+
+                case 2:
+                    ingresarPorGrupo();
+                    break;
+
+                case 3:
+                    sistemaAdmin();
+                    break;
+
+                default:
+                    System.out.println("Opción mal seleccionada, intente nuevamente");
+                    ingresarPeliculas();
+                    break;
+
+            }
 
         } catch (Exception e) {
+            System.out.println("Opción mal ingresada, intenta nuevamente");
 
+        } finally {
+            ingresarPeliculas();
         }
 
     }
 
+    //-----------------------------------------Ingreso de películas Individual-------------------------------------------
+    public void ingresarIndividual() {
+        
+        String nombrePelicula;
+        int tiempoDuracion;
+        String productor;
+        String lenguaje;
+        int opc;
+        
+        try{
+            
+        System.out.println("************");
+        System.out.println("Ingreso Individual");
+        System.out.println("**************");
+        
+        System.out.println("Ingrese nombre de la película: ");
+        nombrePelicula=s.nextLine();
+        System.out.println("Ingrese el tiempo de duración");
+        tiempoDuracion=s2.nextInt();
+        System.out.println("Ingrese nombre del productor: ");
+        productor=s.nextLine();
+        System.out.println("Ingrese lenguaje de la película: ");
+        lenguaje=s2.nextLine();
+        
+        peliculas[0][contPeliIngresada]=nombrePelicula;
+        peliculas[1][contPeliIngresada]=Integer.toString(tiempoDuracion);
+        peliculas[2][contPeliIngresada]=productor;
+        peliculas[3][contPeliIngresada]=lenguaje;
+        
+        contPeliIngresada++;
+        //Momento de guardar estos datos en una matriz!! Recordar castear el numero entero
+        
+        System.out.println("Película Ingresada...\n \n");
+        System.out.println("Presione 0 para regresar ó  1 para ingresar otra película...");
+        opc=s.nextInt();
+        switch(opc){
+            case 0:
+                ingresarPeliculas();
+                break;
+                
+                
+            case 1:
+                ingresarIndividual();
+                break;
+                
+            default:
+                System.out.println("¡Opción incorrecta!");
+                ingresarPeliculas();
+                break;
+        }
+            
+        }catch(Exception e){
+            System.out.println("Opcion mal ingresada intente de nuevo");
+        }
+
+        
+
+    }
+    
+    public void mostrarPeliculas(){
+        int ingresar;
+        
+        for (int i = 0; i < 4; i++) {
+            for (int j = 0; j < 100; j++) {
+                if(peliculas[i][j]==null){
+                    peliculas[i][j]="  ";
+                }
+                
+            }
+            
+        }
+                for (int i = 0; i < 4; i++) {
+            for (int j = 0; j < 100; j++) {
+                System.out.print(" | " +peliculas[i][j]+"  |  ");
+                
+            }
+            System.out.println("");
+            
+        }
+                
+                System.out.println("");
+                System.out.println("PRESIONE 0 PARA REGRESAR AL MENU");
+                ingresar=s.nextInt();
+                if(ingresar==0){
+                    sistemaAdmin();
+                }else{
+                    System.out.println("OPCION INCORRECTA, SERÁ ENVIADO AL INICIO");
+                    sistemaAdmin();
+                }
+                
+                
+    }
+
+    //-------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------Ingreso de películas por grupo---------------------------------------------
+    public void ingresarPorGrupo() {
+
+    }
+
+    //--------------------------------------------------------------------------------------------------------------------
     public void asignarPeliculas() {//Método para asignar películas a las salas
 
     }
