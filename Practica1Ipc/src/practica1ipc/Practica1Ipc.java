@@ -33,6 +33,15 @@ public class Practica1Ipc {
     int sizeSala3 = 0;
     int sizeSala4 = 0;
     int sizeSala5 = 0;
+    int cantAsientosSala1=0;//Variables que llevaran el conteo de la cantidad de asientos que se vendieron en cada sala para el reporte final
+    int cantAsientosSala2=0;
+    int cantAsientosSala3=0;
+    int cantAsientosSala4=0;
+    int cantAsientosSala5=0;
+            
+    int hora = 13;//Hora de inicion del sistema
+    String peliculasDisponibles[]=new String[5];// arreglo temporal de peliculas disponibles en cada horario, se borrará después de cada simulación
+    int contPeliDisponible=0;
 
     String nombreUsuario;
     int password;
@@ -87,10 +96,12 @@ public class Practica1Ipc {
 
     //:::::::::::::::::::::::::::::::::::MENÚ DEL VEDEDOR:::::::::::::::::::::::::::::::::::::::::::::::
     public void sistemaVendedor() {
+
         System.out.println("");
         System.out.println("...............");
         System.out.println("MODO VENDEDOR");
         System.out.println("...............");
+        System.out.println("HORA: " + hora + ":00");
 
         System.out.println("");
         System.out.println("Elija una de las siguientes opciones: ");
@@ -121,7 +132,85 @@ public class Practica1Ipc {
 
     //......................................Vender Asientos..............................................   
     public void venderAsientos() {
+        //Primero me sercioro de que hayan peliculas disponibles para ver
+        
+        //si los siguienes contadores estan vacios luego de recorrer la matriz entonces no hay pelis disponibles
+        int eleccion;
+        String eleccionCadena;
+        int cantidadDeAsientos;
+        int aux=0;//Variable que me permitirá determinar si hay peliculas disponibles o no, dependiendo de si es igual a cero luego de recorrer la matriz de peliculas disponibles
+        
+        for (int i = 0; i <peliculasDisponibles.length ; i++) {
+            if(peliculasDisponibles[i]!=null){
+                aux++;
+            }
+        }
+        
+        if(aux==0){
+            System.out.println("No existen películas disponibles en este momento, consulte al administrador"); 
+        }else{
+            
+        
+        
+        
+        System.out.println("______________________");
+        System.out.println("  VENTA DE ASIENTOS");
+        System.out.println("______________________");
+        System.out.println("");
+        System.out.println("Peliculas Disponibles: ");
+        for (int i = 0; i < peliculasDisponibles.length; i++) {
+            System.out.println(((i+1)+".") +peliculasDisponibles[i]+" En horario de "+hora+":00");
+        }
+        System.out.println("");
+        
+            System.out.println("Elija la película que desea ver: ");
+            eleccionCadena=s.nextLine();
+            System.out.println("Cantidad de asientos: ");
+            cantidadDeAsientos=s.nextInt();
+            
+         //Colocar Try catch aquí??   
+        if((eleccionCadena.equalsIgnoreCase(peliculasDisponibles[0])) || eleccionCadena.equalsIgnoreCase("1")){//Creo que sí funcionaria esta sentencia ya que lñas peliculas random al final se ingresan en el mismo orden que se muestran en la ventana del vendedor (Eso espero :0)
+            //Imprimir asientos sala 1
+            //Aumentar el contador de asientos vendidos de la sala 1 
+            printSala1();
+            System.out.println("");
+            System.out.println("Introduzca el asiento o el rago de asientos deseado: ");
+            
+        }
+        
+        if((eleccionCadena.equalsIgnoreCase(peliculasDisponibles[1])) || eleccionCadena.equalsIgnoreCase("2")){
+          
+            
+        }
+        
+        
+        if((eleccionCadena.equalsIgnoreCase(peliculasDisponibles[2])) || eleccionCadena.equalsIgnoreCase("3")){
+          
+            
+        }
+        
+        
+        if((eleccionCadena.equalsIgnoreCase(peliculasDisponibles[3])) || eleccionCadena.equalsIgnoreCase("4")){
+          
+            
+        }
 
+        if((eleccionCadena.equalsIgnoreCase(peliculasDisponibles[4])) || eleccionCadena.equalsIgnoreCase("5")){
+          
+            
+        }        
+        
+        
+        
+        
+      }
+        
+        
+    }
+    
+    
+    public void printSala1(){
+        
     }
 
     //::::::::::::::::::::::::::::::::::::::MENÚ ADMINISTRADOR::::::::::::::::::::::::::::::::::::::::::::::::::
@@ -133,6 +222,8 @@ public class Practica1Ipc {
             System.out.println("*******************");
             System.out.println("MODO ADMINISTRADOR");
             System.out.println("********************");
+
+            System.out.println("HORA: " + hora + ":00");
 
             System.out.println("Elaja una de las siguientes opciones del menú: ");
             System.out.println("1. Ingresar películas");
@@ -266,6 +357,8 @@ public class Practica1Ipc {
             lenguaje = v2.nextLine();
 
             peliculas[0][contPeliIngresada] = nombrePelicula;
+//            peliculasDisponibles[contPeliDisponible]=nombrePelicula;
+//            contPeliDisponible++;
             peliculas[1][contPeliIngresada] = Integer.toString(tiempoDuracion);
             peliculas[2][contPeliIngresada] = productor;
             peliculas[3][contPeliIngresada] = lenguaje;
@@ -465,23 +558,37 @@ public class Practica1Ipc {
                 sala1[sizeSala1] = peliculas[0][posicionPelicula - 1];//Aquí ya le asignó la película electa a la sala elegida
                 //peliculas[0][posicionPelicula-1]=null;
                 sizeSala1++;
+                peliculasDisponibles[contPeliDisponible]=peliculas[0][posicionPelicula-1];
+                contPeliDisponible++;
             } else if (salaElecta == 2) {
                 sala2[sizeSala2] = peliculas[0][posicionPelicula - 1];
                 //peliculas[0][posicionPelicula-1]=null;
                 sizeSala2++;
+                
+                peliculasDisponibles[contPeliDisponible]=peliculas[0][posicionPelicula-1];
+                contPeliDisponible++;
             } else if (salaElecta == 3) {
                 sala3[sizeSala3] = peliculas[0][posicionPelicula - 1];
                 //peliculas[0][posicionPelicula-1]=null;
                 sizeSala3++;
+                
+                peliculasDisponibles[contPeliDisponible]=peliculas[0][posicionPelicula-1];
+                contPeliDisponible++;
             } else if (salaElecta == 4) {
                 sala4[sizeSala4] = peliculas[0][posicionPelicula - 1];
                 //peliculas[0][posicionPelicula-1]=null;
                 sizeSala4++;
+                
+                peliculasDisponibles[contPeliDisponible]=peliculas[0][posicionPelicula-1];
+                contPeliDisponible++;
 
             } else if (salaElecta == 5) {
                 sala5[sizeSala5] = peliculas[0][posicionPelicula - 1];
                 //Apeliculas[0][posicionPelicula-1]=null;
                 sizeSala5++;
+                
+                peliculasDisponibles[contPeliDisponible]=peliculas[0][posicionPelicula-1];
+                contPeliDisponible++;
             }
 
             System.out.println("");
@@ -508,25 +615,107 @@ public class Practica1Ipc {
         //int i=0;//Iterador para recorrer la matriz
 
         //Mientras no esté vacía esa posicion puedo asignarsela a las salas
-        sala1[sizeSala1] = peliculas[0][r1.nextInt(contPeliIngresada)];//probar el random con 100...
-        sizeSala1++;
-        sala2[sizeSala2] = peliculas[0][r2.nextInt(contPeliIngresada)];
-        sizeSala2++;
-        sala3[sizeSala3] = peliculas[0][r3.nextInt(contPeliIngresada)];
-        sizeSala3++;
-        sala4[sizeSala4] = peliculas[0][r4.nextInt(contPeliIngresada)];
-        sizeSala4++;
-        sala5[sizeSala5] = peliculas[0][r5.nextInt(contPeliIngresada)];
-        sizeSala5++;
         
-        for (int i = 0; i < contPeliIngresada; i++) {
-            
-            
-        }
+        
+        
+        //********************************************************************************
+//        sala1[sizeSala1] = peliculas[0][r1.nextInt(contPeliIngresada)];//probar el random con 100...
+//        sizeSala1++;
+//        sala2[sizeSala2] = peliculas[0][r2.nextInt(contPeliIngresada)];
+//        sizeSala2++;
+//        sala3[sizeSala3] = peliculas[0][r3.nextInt(contPeliIngresada)];
+//        sizeSala3++;
+//        sala4[sizeSala4] = peliculas[0][r4.nextInt(contPeliIngresada)];
+//        sizeSala4++;
+//        sala5[sizeSala5] = peliculas[0][r5.nextInt(contPeliIngresada)];
+//        sizeSala5++;
+//
+//        for (int i = 0; i < contPeliIngresada; i++) {
+//
+//        }
+//
+//        System.out.println("----Asignacion automatica realizada----");
+//        asignarPeliculas();
+//        System.out.println("");
 
+//**********************************************************************************
+
+        int x;//Numero aleatorio para la sala 1
+        x=r1.nextInt(contPeliIngresada);
+        sala1[sizeSala1] = peliculas[0][x];  
+        sizeSala1++;
+        peliculasDisponibles[contPeliDisponible]=peliculas[0][x];
+        contPeliDisponible++;
+        peliculas[0][x]=null;
+        
+        
+        
+        int x2;//Numero Aleatorio para la sala 2
+        x2=r2.nextInt(contPeliIngresada);
+        while(x2==x){
+            x2=r2.nextInt(contPeliIngresada);//Esta parte de código evita el nuevo random sea igual al anterior
+        }
+        sala2[sizeSala2]=peliculas[0][x2];
+        sizeSala2++;
+        peliculasDisponibles[contPeliDisponible]=peliculas[0][x2];
+        contPeliDisponible++;    
+        peliculas[0][x2]=null;
+        
+        
+        
+        
+        int x3;
+        x3=r3.nextInt(contPeliIngresada);
+        while((x3==x) || (x3==x2)){
+            x3=r3.nextInt(contPeliIngresada);
+        }
+        sala3[sizeSala3]=peliculas[0][x3];
+        sizeSala3++;
+        peliculasDisponibles[contPeliDisponible]=peliculas[0][x3];
+        contPeliDisponible++;
+        peliculas[0][x3]=null;
+        
+        
+        
+        
+        int x4;
+        x4=r4.nextInt(contPeliIngresada);
+        while((x4==x) || (x4==x2) || (x4==x3)){
+            x4=r4.nextInt(contPeliIngresada);
+        }
+        sala4[sizeSala4]=peliculas[0][x4];
+        //peliculas[0][x4]=null;
+        sizeSala4++;
+        peliculasDisponibles[contPeliDisponible]=peliculas[0][x4];
+        contPeliDisponible++;  
+        peliculas[0][x4]=null;
+        
+        
+        
+        
+        int x5;
+        x5=r5.nextInt(contPeliIngresada);
+        while((x5==x) || (x5==x2) || (x5==x3) || (x5==x4)){
+            x5=r5.nextInt(contPeliIngresada);
+        }
+        sala5[sizeSala5]=peliculas[0][x5];
+        //peliculas[0][x5]=null;
+        sizeSala5++;
+        peliculasDisponibles[contPeliDisponible]=peliculas[0][x5];
+        contPeliDisponible++;   
+        peliculas[0][x5]=null;
+        
+        
+        
         System.out.println("----Asignacion automatica realizada----");
         asignarPeliculas();
         System.out.println("");
+        
+//        if((peliculas[0][x]!=null) || (peliculas[0][x]!=" ")){
+//        sala1[sizeSala1] = peliculas[0][x];
+//        peliculas[0][x]=null;
+//        }
+        
 
     }
 
@@ -555,7 +744,7 @@ public class Practica1Ipc {
                 System.out.println((i + 1) + "." + sala2[i]);
             }
         }
-        
+
         System.out.println("");
         System.out.println("");
 
@@ -599,37 +788,47 @@ public class Practica1Ipc {
     }
 
     public void simulacionPeliculas() {
-        
-        int h=0;//contador
-        for (int i = 0; i <4 ; i++) {
-            
-            for (int j = 0; j < 100; j++) {
-                if((peliculas[i][j]!=null) || (peliculas[i][j]!="")){
-                    h++;
+
+        if (hora >= 13 && hora <= 25) {
+
+            int h = 0;//contador que verifica si hay películas dispobibles...
+            for (int i = 0; i < 4; i++) {
+
+                for (int j = 0; j < 100; j++) {
+                    if ((peliculas[i][j] != null) || (peliculas[i][j] != "")) {
+                        h++;
+                    }
+
                 }
-                
             }
-        }
-        
-        if(h==0){
-            System.out.println("AÚN NO HAY PELÍCULAS DISPONIBLES, INTENTE NUEVAMENTE");
-            System.out.println("");
+
+            if (h == 0) {
+                System.out.println("AÚN NO HAY PELÍCULAS DISPONIBLES, INTENTE NUEVAMENTE");
+                System.out.println("");
+                sistemaAdmin();
+            } else {
+                System.out.println("");
+                System.out.println("_____________________________________________");
+                System.out.println("------------SIMULACIÓN EN PROCESO----------");
+                System.out.println("_____________________________________________");
+                hora++;
+                hora++;
+                sistemaAdmin();
+
+            }
+
+        } else {
+            
+            System.out.println("Fuera de horario, intente más Tarde...");
+            hora++;
+            hora++;
             sistemaAdmin();
-        }else{
-            System.out.println("");
-            System.out.println("_____________________________________________");
-            System.out.println("------------SIMULACIÓN EN PROCESO----------");
-            System.out.println("_____________________________________________");
-            
-            
-            
+
         }
-        
-        
+
     }
 
-    public void reportes() {  
-        
+    public void reportes() {
 
     }
 
