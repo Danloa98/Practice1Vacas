@@ -20,15 +20,18 @@ public class Practica1Ipc {
     String sala3[] = new String[10];
     String sala4[] = new String[10];
     String sala5[] = new String[10];
-    String peliculas[][] = new String[4][100];//4 filas 100 columnas. Lo maxio de peliculas es 100 Validar eso
+    String peliculas[][] = new String[4][200];//4 filas 100 columnas. Lo maxio de peliculas es 100 Validar eso
     
     String asientosSala1[][] ={{"a1","a2","a3","a4","a5"},{"b1","b2","b3","b4","b5"},{"c1","c2","c3","c4","c5"},{"d1","d2","d3","d4","d5"},{"e1","e2","e3","e4","e5"},{"f1","f2","f3","f4","f5"},{"g1","g2","g3","g4","g5"},{"h1","h2","h3","h4","h5"}};
     //String asientosSala1[][] = new String[8][5];//Matriz para visualizar los asientos disponibles en las salas
-    String asientosSala2[][] = new String[8][5];
-    String asientosSala3[][] = new String[8][5];
-    String asientosSala4[][] = new String[8][5];
-    String asientosSala5[][] = new String[8][5];
-    String asientosSala6[][] = new String[8][5];
+    String asientosSala2[][] ={{"a1","a2","a3","a4","a5"},{"b1","b2","b3","b4","b5"},{"c1","c2","c3","c4","c5"},{"d1","d2","d3","d4","d5"},{"e1","e2","e3","e4","e5"},{"f1","f2","f3","f4","f5"},{"g1","g2","g3","g4","g5"},{"h1","h2","h3","h4","h5"}};
+
+    String asientosSala3[][] ={{"a1","a2","a3","a4","a5"},{"b1","b2","b3","b4","b5"},{"c1","c2","c3","c4","c5"},{"d1","d2","d3","d4","d5"},{"e1","e2","e3","e4","e5"},{"f1","f2","f3","f4","f5"},{"g1","g2","g3","g4","g5"},{"h1","h2","h3","h4","h5"}};
+
+    String asientosSala4[][] ={{"a1","a2","a3","a4","a5"},{"b1","b2","b3","b4","b5"},{"c1","c2","c3","c4","c5"},{"d1","d2","d3","d4","d5"},{"e1","e2","e3","e4","e5"},{"f1","f2","f3","f4","f5"},{"g1","g2","g3","g4","g5"},{"h1","h2","h3","h4","h5"}};
+
+    String asientosSala5[][] ={{"a1","a2","a3","a4","a5"},{"b1","b2","b3","b4","b5"},{"c1","c2","c3","c4","c5"},{"d1","d2","d3","d4","d5"},{"e1","e2","e3","e4","e5"},{"f1","f2","f3","f4","f5"},{"g1","g2","g3","g4","g5"},{"h1","h2","h3","h4","h5"}};
+
     int contPeliIngresada = 0;//Contador para que incremente cada que ingreso una pelicula individual
     int sizeSala1 = 0;//Guardará la longitud de las salas, sirve para saber si ya se le asignó una pelicula. (ASIGNACION MANUAL) 
     int sizeSala2 = 0;
@@ -46,6 +49,8 @@ public class Practica1Ipc {
     int gananciaPelicula1=0;
     int gananciaPelicula2=0;
     int gananciaPelicula3=0;
+    int gananciaPelicula4=0;
+    int gananciaPelicula5=0;
 
     int hora = 13;//Hora de inicion del sistema
     String peliculasDisponibles[] = new String[5];// arreglo temporal de peliculas disponibles en cada horario, se borrará después de cada simulación
@@ -200,19 +205,7 @@ public class Practica1Ipc {
             if ((eleccionCadena.equalsIgnoreCase(peliculasDisponibles[0])) || eleccionCadena.equalsIgnoreCase("1")) {//Creo que sí funcionaria esta sentencia ya que lñas peliculas random al final se ingresan en el mismo orden que se muestran en la ventana del vendedor (Eso espero :0)
                 //Imprimir asientos sala 1
                 //Aumentar el contador de asientos vendidos de la sala 1
-//                for (int i = 0; i < 8; i++) {
-//                    for (int j = 0; j < 5; j++) {
-//                        if (asientosSala1[i][j] != null) {
-//                            auxAsientos++;
-//                        }
-//                    }
-//                }
 
-//                if (auxAsientos == 0) {
-//                    printSala1();
-//                } else {
-//
-//                }
                     printSala1();
 
                 if (cantidadDeAsientos > 1) {//Si la cantidad de asientos es mayor a uno, solo podré ingresar rangos
@@ -226,13 +219,7 @@ public class Practica1Ipc {
                     System.out.println("");
                     
                     
-//         for (int i = 0; i < 8; i++) {
-//            for (int j = 0; j < 5; j++) {
-//                System.out.print(asientosSala1[i][j] + " ");
-//            }
-//            System.out.println(" ");
-//
-//        }
+
                     System.out.println(" ");
                     System.out.println("Introduzca el rango de asientos deseado: ");
                     rangoAsientos=hh.nextLine();
@@ -316,7 +303,8 @@ public class Practica1Ipc {
                     System.out.println("                  Total: "+(total));
                     System.out.println("                  Cambio: "+ (money-(total)));
                     System.out.println("_______________________________________________");
-                              
+                              gananciaPelicula1+=total;
+                              cantAsientosSala1+=cantidadDeAsientos;
                               
                               
                     
@@ -364,20 +352,639 @@ public class Practica1Ipc {
                 
 
             }
+            
+//____________________________________________________________SALA 2___________________________________________________
 
             if ((eleccionCadena.equalsIgnoreCase(peliculasDisponibles[1])) || eleccionCadena.equalsIgnoreCase("2")) {
+                
+               printSala2();
+
+                if (cantidadDeAsientos > 1) {//Si la cantidad de asientos es mayor a uno, solo podré ingresar rangos
+                    boolean flag=false;
+                    boolean flag2=false;
+                    String rangoAsientos;
+                    Scanner hh=new Scanner(System.in);
+                    Scanner ll=new Scanner(System.in);
+                    int money;
+                    System.out.println("");
+                    System.out.println("");
+                    
+                    
+
+                    System.out.println(" ");
+                    System.out.println("Introduzca el rango de asientos deseado: ");
+                    rangoAsientos=hh.nextLine();
+                             String rango[];
+                             rango = rangoAsientos.split("-");
+                              for (int i = 0; i < rango.length; i++) {
+                                  System.out.println(rango[i]);
+                                 }
+                              
+                              for (int i = 0; i < 8; i++) {
+            for (int j = 0; j < 5; j++) {
+
+                if ((asientosSala2[i][j].equals(rango[1]))) {
+                    flag = true;
+                }
+                asientosSala2[i][j]=" * ";
+
+                if (flag == true) {
+                    break;
+                }
+                
+
+            }
+            if (flag == true) {
+                break;
+
+            } else {
+
+            }
+        }
+        
+
+
+        
+        
+    String codigoAsiento[] = {"a", "b", "c", "d", "e", "f", "g", "h"};
+    
+        for (int i = 0; i < 8; i++) {
+            
+            for (int j = 0; j < 5; j++) {
+                
+                asientosSala2[i][j] = (codigoAsiento[i] + (j + 1));
+                if(asientosSala2[i][j].equals(rango[0])){
+                    flag2=true;
+                    asientosSala2[i][j]=" * ";
+                }
+                 
+                
+                if(flag2==true){
+                    break;
+                }
+                
+            }if(flag2==true){
+                break;
+            }else{
+                
+            }
+        }
+        
+        
+       
+                              
+                    System.out.println("Ingrese la cantidad de dinero con la cual pagará: ");
+                    money=ll.nextInt();
+                    
+                    
+                    
+        for (int i = 0; i < 8; i++) {
+            for (int j = 0; j < 5; j++) {
+                System.out.print(asientosSala2[i][j] + " ");
+            }
+            System.out.println(" ");
+        }
+                    
+                    
+      int total=cantidadDeAsientos*30;
+                    System.out.println("___________________________________________");
+                    System.out.println("           Nombre de la Película: "+ peliculasDisponibles[1]);
+                    System.out.println("                  Sala:   2  ");
+                    System.out.println("                 Asiento: "+ rangoAsientos);
+                    System.out.println("                  Total: "+(total));
+                    System.out.println("                  Cambio: "+ (money-(total)));
+                    System.out.println("_______________________________________________");
+                              gananciaPelicula2+=total;
+                              cantAsientosSala2+=cantidadDeAsientos;
+                              
+                              
+                    
+       //______________________________________Solo un Asiento____________________________             
+                    
+
+                } else {
+                    System.out.println("Ingrese el numero del asiento");
+                    asientoElecto = zz.nextLine();
+                    System.out.println("");
+                    
+                    System.out.println("Ingrese la cantidad de dinero con la cual pagará: ");
+                    dineroPago=aa.nextInt();
+
+                    for (int i = 0; i < 8; i++) {
+                        for (int j = 0; j < 5; j++) {
+                            if (asientosSala2[i][j].equals(asientoElecto)) {
+                                asientosSala2[i][j] = "*";
+                                cantAsientosSala2+=cantidadDeAsientos;
+                            }
+                        }
+                    }
+                    System.out.println("");
+                    
+               System.out.println("----Asiento Vendido---");                
+               printSala2();
+                       int total=cantidadDeAsientos*30;
+                    System.out.println("___________________________________________");
+                    System.out.println("           Nombre de la Película: "+ peliculasDisponibles[1]);
+                    System.out.println("                  Sala:   2  ");
+                    System.out.println("                 Asiento: "+ asientoElecto);
+                    System.out.println("                  Total: "+(total));
+                    System.out.println("                  Cambio: "+ (dineroPago-(total)));
+                    System.out.println("_______________________________________________");
+                    gananciaPelicula2+=total;
+                    
+                    
+                }
+                
+
+            
+                
+                
+                sistemaVendedor();
+                
+                
+ 
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
 
             }
 
+            
+         
+//_______________________________________________________SALA 3__________________________________________________________
+            
             if ((eleccionCadena.equalsIgnoreCase(peliculasDisponibles[2])) || eleccionCadena.equalsIgnoreCase("3")) {
+                
+                printSala3();
+
+                if (cantidadDeAsientos > 1) {//Si la cantidad de asientos es mayor a uno, solo podré ingresar rangos
+                    boolean flag=false;
+                    boolean flag2=false;
+                    String rangoAsientos;
+                    Scanner hh=new Scanner(System.in);
+                    Scanner ll=new Scanner(System.in);
+                    int money;
+                    System.out.println("");
+                    System.out.println("");
+                    
+                    
+
+                    System.out.println(" ");
+                    System.out.println("Introduzca el rango de asientos deseado: ");
+                    rangoAsientos=hh.nextLine();
+                             String rango[];
+                             rango = rangoAsientos.split("-");
+                              for (int i = 0; i < rango.length; i++) {
+                                  System.out.println(rango[i]);
+                                 }
+                              
+                              for (int i = 0; i < 8; i++) {
+            for (int j = 0; j < 5; j++) {
+
+                if ((asientosSala3[i][j].equals(rango[1]))) {
+                    flag = true;
+                }
+                asientosSala3[i][j]=" * ";
+
+                if (flag == true) {
+                    break;
+                }
+                
 
             }
+            if (flag == true) {
+                break;
+
+            } else {
+
+            }
+        }
+        
+
+
+        
+        
+    String codigoAsiento[] = {"a", "b", "c", "d", "e", "f", "g", "h"};
+    
+        for (int i = 0; i < 8; i++) {
+            
+            for (int j = 0; j < 5; j++) {
+                
+                asientosSala3[i][j] = (codigoAsiento[i] + (j + 1));
+                if(asientosSala3[i][j].equals(rango[0])){
+                    flag2=true;
+                    asientosSala3[i][j]=" * ";
+                }
+                 
+                
+                if(flag2==true){
+                    break;
+                }
+                
+            }if(flag2==true){
+                break;
+            }else{
+                
+            }
+        }
+        
+        
+       
+                              
+                    System.out.println("Ingrese la cantidad de dinero con la cual pagará: ");
+                    money=ll.nextInt();
+                    
+                    
+                    
+        for (int i = 0; i < 8; i++) {
+            for (int j = 0; j < 5; j++) {
+                System.out.print(asientosSala3[i][j] + " ");
+            }
+            System.out.println(" ");
+        }
+                    
+                    
+      int total=cantidadDeAsientos*30;
+                    System.out.println("___________________________________________");
+                    System.out.println("           Nombre de la Película: "+ peliculasDisponibles[2]);
+                    System.out.println("                  Sala:   3  ");
+                    System.out.println("                 Asiento: "+ rangoAsientos);
+                    System.out.println("                  Total: "+(total));
+                    System.out.println("                  Cambio: "+ (money-(total)));
+                    System.out.println("_______________________________________________");
+                              gananciaPelicula3+=total;
+                              cantAsientosSala3+=cantidadDeAsientos;
+                              
+                              
+                    
+       //______________________________________Solo un Asiento____________________________             
+                    
+
+                } else {
+                    System.out.println("Ingrese el numero del asiento");
+                    asientoElecto = zz.nextLine();
+                    System.out.println("");
+                    
+                    System.out.println("Ingrese la cantidad de dinero con la cual pagará: ");
+                    dineroPago=aa.nextInt();
+
+                    for (int i = 0; i < 8; i++) {
+                        for (int j = 0; j < 5; j++) {
+                            if (asientosSala3[i][j].equals(asientoElecto)) {
+                                asientosSala3[i][j] = "*";
+                                cantAsientosSala3+=cantidadDeAsientos;
+                            }
+                        }
+                    }
+                    System.out.println("");
+                    
+               System.out.println("----Asiento Vendido---");                
+               printSala3();
+                       int total=cantidadDeAsientos*30;
+                    System.out.println("___________________________________________");
+                    System.out.println("           Nombre de la Película: "+ peliculasDisponibles[2]);
+                    System.out.println("                  Sala:   3  ");
+                    System.out.println("                 Asiento: "+ asientoElecto);
+                    System.out.println("                  Total: "+(total));
+                    System.out.println("                  Cambio: "+ (dineroPago-(total)));
+                    System.out.println("_______________________________________________");
+                    gananciaPelicula3+=total;
+                    
+                    
+                }
+                
+
+            
+                
+                
+                sistemaVendedor();
+
+            }
+            
+            
+            
+            
+            
+            
+            
+            
+//_______________________________________________________SALA 4____________________________________________________________
 
             if ((eleccionCadena.equalsIgnoreCase(peliculasDisponibles[3])) || eleccionCadena.equalsIgnoreCase("4")) {
+                
+                              printSala4();
+
+                if (cantidadDeAsientos > 1) {//Si la cantidad de asientos es mayor a uno, solo podré ingresar rangos
+                    boolean flag=false;
+                    boolean flag2=false;
+                    String rangoAsientos;
+                    Scanner hh=new Scanner(System.in);
+                    Scanner ll=new Scanner(System.in);
+                    int money;
+                    System.out.println("");
+                    System.out.println("");
+                    
+                    
+
+                    System.out.println(" ");
+                    System.out.println("Introduzca el rango de asientos deseado: ");
+                    rangoAsientos=hh.nextLine();
+                             String rango[];
+                             rango = rangoAsientos.split("-");
+                              for (int i = 0; i < rango.length; i++) {
+                                  System.out.println(rango[i]);
+                                 }
+                              
+                              for (int i = 0; i < 8; i++) {
+            for (int j = 0; j < 5; j++) {
+
+                if ((asientosSala4[i][j].equals(rango[1]))) {
+                    flag = true;
+                }
+                asientosSala4[i][j]=" * ";
+
+                if (flag == true) {
+                    break;
+                }
+                
 
             }
+            if (flag == true) {
+                break;
+
+            } else {
+
+            }
+        }
+        
+
+
+        
+        
+    String codigoAsiento[] = {"a", "b", "c", "d", "e", "f", "g", "h"};
+    
+        for (int i = 0; i < 8; i++) {
+            
+            for (int j = 0; j < 5; j++) {
+                
+                asientosSala4[i][j] = (codigoAsiento[i] + (j + 1));
+                if(asientosSala4[i][j].equals(rango[0])){
+                    flag2=true;
+                    asientosSala4[i][j]=" * ";
+                }
+                 
+                
+                if(flag2==true){
+                    break;
+                }
+                
+            }if(flag2==true){
+                break;
+            }else{
+                
+            }
+        }
+        
+        
+       
+                              
+                    System.out.println("Ingrese la cantidad de dinero con la cual pagará: ");
+                    money=ll.nextInt();
+                    
+                    
+                    
+        for (int i = 0; i < 8; i++) {
+            for (int j = 0; j < 5; j++) {
+                System.out.print(asientosSala4[i][j] + " ");
+            }
+            System.out.println(" ");
+        }
+                    
+                    
+      int total=cantidadDeAsientos*30;
+                    System.out.println("___________________________________________");
+                    System.out.println("           Nombre de la Película: "+ peliculasDisponibles[3]);
+                    System.out.println("                  Sala:   4  ");
+                    System.out.println("                 Asiento: "+ rangoAsientos);
+                    System.out.println("                  Total: "+(total));
+                    System.out.println("                  Cambio: "+ (money-(total)));
+                    System.out.println("_______________________________________________");
+                              gananciaPelicula4+=total;
+                              cantAsientosSala4+=cantidadDeAsientos;
+                              
+                              
+                    
+       //______________________________________Solo un Asiento____________________________             
+                    
+
+                } else {
+                    System.out.println("Ingrese el numero del asiento");
+                    asientoElecto = zz.nextLine();
+                    System.out.println("");
+                    
+                    System.out.println("Ingrese la cantidad de dinero con la cual pagará: ");
+                    dineroPago=aa.nextInt();
+
+                    for (int i = 0; i < 8; i++) {
+                        for (int j = 0; j < 5; j++) {
+                            if (asientosSala4[i][j].equals(asientoElecto)) {
+                                asientosSala4[i][j] = "*";
+                                cantAsientosSala4+=cantidadDeAsientos;
+                            }
+                        }
+                    }
+                    System.out.println("");
+                    
+               System.out.println("----Asiento Vendido---");                
+               printSala4();
+                       int total=cantidadDeAsientos*30;
+                    System.out.println("___________________________________________");
+                    System.out.println("           Nombre de la Película: "+ peliculasDisponibles[3]);
+                    System.out.println("                  Sala:   4  ");
+                    System.out.println("                 Asiento: "+ asientoElecto);
+                    System.out.println("                  Total: "+(total));
+                    System.out.println("                  Cambio: "+ (dineroPago-(total)));
+                    System.out.println("_______________________________________________");
+                    gananciaPelicula4+=total;
+                    
+                    
+                }
+                
+
+            
+                
+                
+                sistemaVendedor();
+                
+                
+                
+                
+                
+                
+
+            }
+//____________________________________________________SALA 5____________________________________________________________
 
             if ((eleccionCadena.equalsIgnoreCase(peliculasDisponibles[4])) || eleccionCadena.equalsIgnoreCase("5")) {
+                
+                               printSala5();
+
+                if (cantidadDeAsientos > 1) {//Si la cantidad de asientos es mayor a uno, solo podré ingresar rangos
+                    boolean flag=false;
+                    boolean flag2=false;
+                    String rangoAsientos;
+                    Scanner hh=new Scanner(System.in);
+                    Scanner ll=new Scanner(System.in);
+                    int money;
+                    System.out.println("");
+                    System.out.println("");
+                    
+                    
+
+                    System.out.println(" ");
+                    System.out.println("Introduzca el rango de asientos deseado: ");
+                    rangoAsientos=hh.nextLine();
+                             String rango[];
+                             rango = rangoAsientos.split("-");
+                              for (int i = 0; i < rango.length; i++) {
+                                  System.out.println(rango[i]);
+                                 }
+                              
+                              for (int i = 0; i < 8; i++) {
+            for (int j = 0; j < 5; j++) {
+
+                if ((asientosSala5[i][j].equals(rango[1]))) {
+                    flag = true;
+                }
+                asientosSala5[i][j]=" * ";
+
+                if (flag == true) {
+                    break;
+                }
+                
+
+            }
+            if (flag == true) {
+                break;
+
+            } else {
+
+            }
+        }
+        
+
+
+        
+        
+    String codigoAsiento[] = {"a", "b", "c", "d", "e", "f", "g", "h"};
+    
+        for (int i = 0; i < 8; i++) {
+            
+            for (int j = 0; j < 5; j++) {
+                
+                asientosSala5[i][j] = (codigoAsiento[i] + (j + 1));
+                if(asientosSala5[i][j].equals(rango[0])){
+                    flag2=true;
+                    asientosSala5[i][j]=" * ";
+                }
+                 
+                
+                if(flag2==true){
+                    break;
+                }
+                
+            }if(flag2==true){
+                break;
+            }else{
+                
+            }
+        }
+        
+        
+       
+                              
+                    System.out.println("Ingrese la cantidad de dinero con la cual pagará: ");
+                    money=ll.nextInt();
+                    
+                    
+                    
+        for (int i = 0; i < 8; i++) {
+            for (int j = 0; j < 5; j++) {
+                System.out.print(asientosSala5[i][j] + " ");
+            }
+            System.out.println(" ");
+        }
+                    
+                    
+      int total=cantidadDeAsientos*30;
+                    System.out.println("___________________________________________");
+                    System.out.println("           Nombre de la Película: "+ peliculasDisponibles[4]);
+                    System.out.println("                  Sala:   5  ");
+                    System.out.println("                 Asiento: "+ rangoAsientos);
+                    System.out.println("                  Total: "+(total));
+                    System.out.println("                  Cambio: "+ (money-(total)));
+                    System.out.println("_______________________________________________");
+                              gananciaPelicula5+=total;
+                              cantAsientosSala5+=cantidadDeAsientos;
+                              
+                              
+                    
+       //______________________________________Solo un Asiento____________________________             
+                    
+
+                } else {
+                    System.out.println("Ingrese el numero del asiento");
+                    asientoElecto = zz.nextLine();
+                    System.out.println("");
+                    
+                    System.out.println("Ingrese la cantidad de dinero con la cual pagará: ");
+                    dineroPago=aa.nextInt();
+
+                    for (int i = 0; i < 8; i++) {
+                        for (int j = 0; j < 5; j++) {
+                            if (asientosSala5[i][j].equals(asientoElecto)) {
+                                asientosSala5[i][j] = "*";
+                                cantAsientosSala5+=cantidadDeAsientos;
+                            }
+                        }
+                    }
+                    System.out.println("");
+                    
+               System.out.println("----Asiento Vendido---");                
+               printSala5();
+                       int total=cantidadDeAsientos*30;
+                    System.out.println("___________________________________________");
+                    System.out.println("           Nombre de la Película: "+ peliculasDisponibles[4]);
+                    System.out.println("                  Sala:   5  ");
+                    System.out.println("                 Asiento: "+ asientoElecto);
+                    System.out.println("                  Total: "+(total));
+                    System.out.println("                  Cambio: "+ (dineroPago-(total)));
+                    System.out.println("_______________________________________________");
+                    gananciaPelicula5+=total;
+                    
+                    
+                }
+                
+
+            
+                
+                
+                sistemaVendedor();               
+                
+                
 
             }
 
@@ -389,15 +996,80 @@ public class Practica1Ipc {
     
     public void iniciarSala1(){
         
-        
-        String codigoAsiento[] = {"a", "b", "c", "d", "e", "f", "g", "h"};
+       String initSala1[][]={{"a1","a2","a3","a4","a5"},{"b1","b2","b3","b4","b5"},{"c1","c2","c3","c4","c5"},{"d1","d2","d3","d4","d5"},{"e1","e2","e3","e4","e5"},{"f1","f2","f3","f4","f5"},{"g1","g2","g3","g4","g5"},{"h1","h2","h3","h4","h5"}};
+
         for (int i = 0; i < 8; i++) {
             for (int j = 0; j < 5; j++) {
-                asientosSala1[i][j] = codigoAsiento[i] + (j + 1) + " ";
+                asientosSala1[i][j]=initSala1[i][j];
+            }
+        }
+       
+//        String codigoAsiento[] = {"a", "b", "c", "d", "e", "f", "g", "h"};
+//        for (int i = 0; i < 8; i++) {
+//            for (int j = 0; j < 5; j++) {
+//                asientosSala1[i][j] = codigoAsiento[i] + (j + 1) + " ";
+//            }
+//        }
+        
+    }
+    
+    public void iniciarSala2(){
+        
+        
+         String initSala1[][]={{"a1","a2","a3","a4","a5"},{"b1","b2","b3","b4","b5"},{"c1","c2","c3","c4","c5"},{"d1","d2","d3","d4","d5"},{"e1","e2","e3","e4","e5"},{"f1","f2","f3","f4","f5"},{"g1","g2","g3","g4","g5"},{"h1","h2","h3","h4","h5"}};
+
+        for (int i = 0; i < 8; i++) {
+            for (int j = 0; j < 5; j++) {
+                asientosSala2[i][j]=initSala1[i][j];
             }
         }
         
     }
+    
+    
+        public void iniciarSala3(){
+        
+        
+         String initSala1[][]={{"a1","a2","a3","a4","a5"},{"b1","b2","b3","b4","b5"},{"c1","c2","c3","c4","c5"},{"d1","d2","d3","d4","d5"},{"e1","e2","e3","e4","e5"},{"f1","f2","f3","f4","f5"},{"g1","g2","g3","g4","g5"},{"h1","h2","h3","h4","h5"}};
+
+        for (int i = 0; i < 8; i++) {
+            for (int j = 0; j < 5; j++) {
+                asientosSala3[i][j]=initSala1[i][j];
+            }
+        }
+        
+    }
+ 
+     public void iniciarSala4(){
+        
+        
+         String initSala1[][]={{"a1","a2","a3","a4","a5"},{"b1","b2","b3","b4","b5"},{"c1","c2","c3","c4","c5"},{"d1","d2","d3","d4","d5"},{"e1","e2","e3","e4","e5"},{"f1","f2","f3","f4","f5"},{"g1","g2","g3","g4","g5"},{"h1","h2","h3","h4","h5"}};
+
+        for (int i = 0; i < 8; i++) {
+            for (int j = 0; j < 5; j++) {
+                asientosSala4[i][j]=initSala1[i][j];
+            }
+        }
+        
+    }       
+    
+         public void iniciarSala5(){
+        
+        
+         String initSala1[][]={{"a1","a2","a3","a4","a5"},{"b1","b2","b3","b4","b5"},{"c1","c2","c3","c4","c5"},{"d1","d2","d3","d4","d5"},{"e1","e2","e3","e4","e5"},{"f1","f2","f3","f4","f5"},{"g1","g2","g3","g4","g5"},{"h1","h2","h3","h4","h5"}};
+
+        for (int i = 0; i < 8; i++) {
+            for (int j = 0; j < 5; j++) {
+                asientosSala5[i][j]=initSala1[i][j];
+            }
+        }
+        
+    }
+    
+    
+    
+    
+    
     public void printSala1() {
 
 //        String codigoAsiento[] = {"a", "b", "c", "d", "e", "f", "g", "h"};
@@ -419,16 +1091,11 @@ public class Practica1Ipc {
 
     public void printSala2() {
 
-        String codigoAsiento[] = {"a", "b", "c", "d", "e", "f", "g", "h"};
-        for (int i = 0; i < 8; i++) {
-            for (int j = 0; j < 5; j++) {
-                asientosSala2[i][j] = codigoAsiento[i] + (j + 1) + " ";
-            }
-        }
+  
 
         for (int i = 0; i < 8; i++) {
             for (int j = 0; j < 5; j++) {
-                System.out.print(asientosSala2[i][j]);
+                System.out.print(asientosSala2[i][j]+" ");
             }
             System.out.println(" ");
         }
@@ -437,16 +1104,11 @@ public class Practica1Ipc {
 
     public void printSala3() {
 
-        String codigoAsiento[] = {"a", "b", "c", "d", "e", "f", "g", "h"};
-        for (int i = 0; i < 8; i++) {
-            for (int j = 0; j < 5; j++) {
-                asientosSala3[i][j] = codigoAsiento[i] + (j + 1) + " ";
-            }
-        }
+ 
 
         for (int i = 0; i < 8; i++) {
             for (int j = 0; j < 5; j++) {
-                System.out.print(asientosSala3[i][j]);
+                System.out.print(asientosSala3[i][j]+" ");
             }
             System.out.println(" ");
         }
@@ -455,16 +1117,10 @@ public class Practica1Ipc {
 
     public void printSala4() {
 
-        String codigoAsiento[] = {"a", "b", "c", "d", "e", "f", "g", "h"};
-        for (int i = 0; i < 8; i++) {
-            for (int j = 0; j < 5; j++) {
-                asientosSala4[i][j] = codigoAsiento[i] + (j + 1) + " ";
-            }
-        }
 
         for (int i = 0; i < 8; i++) {
             for (int j = 0; j < 5; j++) {
-                System.out.print(asientosSala4[i][j]);
+                System.out.print(asientosSala4[i][j]+" ");
             }
             System.out.println(" ");
         }
@@ -473,16 +1129,11 @@ public class Practica1Ipc {
 
     public void printSala5() {
 
-        String codigoAsiento[] = {"a", "b", "c", "d", "e", "f", "g", "h"};
-        for (int i = 0; i < 8; i++) {
-            for (int j = 0; j < 5; j++) {
-                asientosSala5[i][j] = codigoAsiento[i] + (j + 1) + " ";
-            }
-        }
+  
 
         for (int i = 0; i < 8; i++) {
             for (int j = 0; j < 5; j++) {
-                System.out.print(asientosSala5[i][j]);
+                System.out.print(asientosSala5[i][j]+" ");
             }
             System.out.println(" ");
         }
@@ -738,6 +1389,22 @@ public class Practica1Ipc {
 
             }
 
+        }
+        
+        if(contPeliIngresada>100){
+            System.out.println("¡ERROR!, Límite máximo de películas sobrepasado, intente de nuevo");
+            
+            
+            limpiarPeliculas();
+            contPeliIngresada=0;
+            sistemaAdmin();
+        }else{
+            System.out.println("___________________________________________");
+            System.out.println("Peliculas Ingresadas satisfactoriamente...");
+            System.out.println("___________________________________________");
+            System.out.println("");
+            System.out.println("");
+            sistemaAdmin();
         }
 
     }
@@ -1069,6 +1736,16 @@ public class Practica1Ipc {
                 System.out.println("_____________________________________________");
                 hora++;
                 hora++;
+                
+                
+                limpiarPeliculas();
+                iniciarSala1();
+                iniciarSala2();
+                iniciarSala3();
+                iniciarSala4();
+                iniciarSala5();   
+       
+                
                 sistemaAdmin();
 
             }
@@ -1077,11 +1754,20 @@ public class Practica1Ipc {
 
             System.out.println("Fuera de horario, intente más Tarde...");
             hora++;
-            hora++;
+            hora=13;
             sistemaAdmin();
 
         }
 
+    }
+    
+    
+    public void limpiarPeliculas(){
+        for (int i = 0; i < 4; i++) {
+            for (int j = 0; j < 100; j++) {
+                peliculas[i][j]=" "; 
+            }
+        }
     }
 
     public void reportes() {
